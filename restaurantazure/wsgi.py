@@ -19,4 +19,4 @@ settings_module = 'restaurantazure.deployment'
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
 
 application = get_wsgi_application()
-#application = WhiteNoise(get_wsgi_application(), root=os.path.join(BASE_DIR, 'staticfiles'))
+application = WhiteNoise(application, root=os.path.join(BASE_DIR, 'staticfiles'))

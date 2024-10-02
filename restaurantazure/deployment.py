@@ -1,7 +1,10 @@
 import os
 from .settings import *
 from .settings import BASE_DIR
+import whitenoise
 
+
+SECRET_KEY = os.environ["SECRET"]
 ALLOWED_HOSTS = ['azurerestaurant.azurewebsites.net']
 CSRF_TRUSTED_ORIGINS = ['https://' + 'azurerestaurant.azurewebsites.net']
 DEBUG = False
