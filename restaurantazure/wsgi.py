@@ -15,7 +15,7 @@ from django.core.wsgi import get_wsgi_application
 
 #settings_module = 'restaurantazure.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'restaurantazure.settings'
 # trash
-settings_module = 'restaurantazure.settings'
+settings_module = 'restaurantazure.deployment'
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
 
 application = get_wsgi_application()
