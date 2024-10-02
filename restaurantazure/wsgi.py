@@ -11,7 +11,7 @@ import os
 from .settings import BASE_DIR
 from django.conf import settings
 from django.core.wsgi import get_wsgi_application
-#from whitenoise import WhiteNoise
+from whitenoise import WhiteNoise
 
 #settings_module = 'restaurantazure.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'restaurantazure.settings'
 # trash
