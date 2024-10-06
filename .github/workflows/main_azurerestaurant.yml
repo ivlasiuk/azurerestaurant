@@ -33,6 +33,7 @@ jobs:
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Run migrations
         run: |
+          python manage.py makemigrations
           python manage.py migrate --noinput
 
       - name: Collect static files
