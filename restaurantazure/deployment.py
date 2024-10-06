@@ -57,3 +57,13 @@ LOGGING = {
         },
     },
 }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'azurerestaurant-database',
+        'USER': 'wqlruurzop',
+        'PASSWORD': 'fKdcoZ$XrvcbPcUI',
+        'HOST': 'azurerestaurant-server.mysql.database.azure.com'
+    }
+}

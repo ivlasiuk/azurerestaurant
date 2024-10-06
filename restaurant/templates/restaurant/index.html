@@ -13,8 +13,213 @@
     <div class="container">
         <div class="row">
             <div class="col-6 mt-5 border border-danger border-2 rounded">
-                <div class="text"></div>
+                <div class="text" id="div1"></div>
             </div>
+            <div class="col-6 mt-5"></div>
+            <div class="col-6 mt-5"></div>
+            <div class="col-6 mt-5 mb-5 border border-primary border-2 rounded">
+                <div class="text" id="div2"></div>
+            </div>
+            <div class="col-2 d-grid">
+                <a href="{% url 'home' %}" class="btn btn{% if isHome %}-outline{% endif %}-light mt-5" style="font-size: 1.5em">Home page</a>
+            </div>
+            <div class="col-2 d-grid">
+                <a href="{% url 'clients' %}" class="btn btn{% if isClients %}-outline{% endif %}-light mt-5" style="font-size: 1.5em">Clients</a>
+            </div>
+            <div class="col-2 d-grid">
+                <a href="{% url 'waiters' %}" class="btn btn{% if isWaiters %}-outline{% endif %}-light mt-5" style="font-size: 1.5em">Waiters</a>
+            </div>
+            <div class="col-2 d-grid">
+                <a href="{% url 'orders' %}" class="btn btn{% if isOrders %}-outline{% endif %}-light mt-5" style="font-size: 1.5em">Orders</a>
+            </div>
+            <div class="col-2 d-grid">
+                <a href="{% url 'locations' %}" class="btn btn{% if isLocation %}-outline{% endif %}-light mt-5" style="font-size: 1.5em">Locations</a>
+            </div>
+            <div class="col-2 d-grid">
+                <a href="{% url 'ordercards' %}" class="btn btn{% if isOrderCard %}-outline{% endif %}-light mt-5" style="font-size: 1.5em">Order cards</a>
+            </div>
+            {% if isClients %}
+            <div class="col-12">
+            <table class="table tabletext mt-5">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Phone number</th>
+            </tr>
+            </thead>
+                <tbody>
+                {% for el in clients %}
+                    <tr>
+                        <td>{{el.id}}</td>
+                        <td>{{el.name}}</td>
+                        <td>{{el.surname}}</td>
+                        <td>{{el.phone_number}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            {% endif %}
+            {% if isWaiters %}
+            <div class="col-12">
+            <table class="table tabletext mt-5">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+            </tr>
+            </thead>
+                <tbody>
+                {% for el in waiters %}
+                    <tr>
+                        <td>{{el.id}}</td>
+                        <td>{{el.name}}</td>
+                        <td>{{el.surname}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            {% endif %}
+            {% if isOrders %}
+            <div class="col-12">
+            <table class="table tabletext mt-5">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Details</th>
+                <th scope="col">Price</th>
+            </tr>
+            </thead>
+                <tbody>
+                {% for el in orders %}
+                    <tr>
+                        <td>{{el.id}}</td>
+                        <td>{{el.details}}</td>
+                        <td>{{el.price}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            {% endif %}
+            {% if isLocation %}
+            <div class="col-12">
+            <table class="table tabletext mt-5">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Address</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+                <tbody>
+                {% for el in locations %}
+                    <tr>
+                        <td>{{el.id}}</td>
+                        <td>{{el.address}}</td>
+                        <td>{{el.description}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            {% endif %}
+            {% if isOrderCard %}
+            <div class="col-12">
+            <table class="table tabletext mt-5">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Client name</th>
+                <th scope="col">Waiter name</th>
+                <th scope="col">Order id</th>
+                <th scope="col">Price</th>
+                <th scope="col">Address</th>
+            </tr>
+            </thead>
+                <tbody>
+                {% for el in ordercards %}
+                    <tr>
+                        <td>{{el.id}}</td>
+                        <td>{{el.client.name}} {{el.client.surname}}</td>
+                        <td>{{el.waiter.name}} {{el.waiter.surname}}</td>
+                        <td>{{el.order.id}}</td>
+                        <td>{{el.order.price}}$</td>
+                        <td>{{el.location.address}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            {% endif %}
+          {% if isHome %}
+            <p class="text mt-5">Query 1: Information about all customers who have placed an order
+                for the specified amount or more.</p>
+            <form action="{% url 'home' %}" method="get">
+            <input type="number" class="form-control" name="price" required>
+            <input type="submit" class="btn btn-primary mt-2" value="Execute">
+            </form>
+            {% if result_set %}
+            <table class="table tabletext mt-3">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Phone number</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for el in result_set %}
+                    <tr>
+                        <td>{{ el.client.id }}</td>
+                        <td>{{ el.client.name }}</td>
+                        <td>{{ el.client.surname }}</td>
+                        <td>{{ el.order.price }}</td>
+                        <td>{{ el.client.phone_number }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+            {% if isEmpty %}
+            <p class="text mt-3">No data</p>
+            {% endif %}
+            <p class="text mt-5">Query 2: Information about all orders of the selected customer.</p>
+            <form action="{% url 'home' %}" method="get">
+            <select class="form-control" id="select1" name="client">
+                {% for el in clients %}
+                <option value="{{ el.id }}">{{ el.id }} {{ el.name }} {{ el.surname }}</option>
+                {% endfor %}
+            </select>
+                <input type="submit" class="btn btn-primary mt-2 mb-3" value="Execute">
+            </form>
+            {% if result_set1 %}
+            <table class="table tabletext mt-3">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for el in result_set1 %}
+                    <tr>
+                        <td>{{ el.order.id }}</td>
+                        <td>{{ el.order.details }}</td>
+                        <td>{{ el.order.price }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+            {% endif %}
     </div>
     </div>
 <script src="{% static 'restaurant/js/typewrite.js' %}"></script>
