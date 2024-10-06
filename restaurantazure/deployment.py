@@ -64,6 +64,10 @@ DATABASES = {
         'NAME': 'azurerestaurant-database',
         'USER': 'wqlruurzop',
         'PASSWORD': 'fKdcoZ$XrvcbPcUI',
-        'HOST': 'azurerestaurant-server.mysql.database.azure.com'
+        'HOST': 'azurerestaurant-server.mysql.database.azure.com',
+        'PORT': '3306',
+        'OPTIONS': {
+            'ssl': {'ca': BASE_DIR / 'DigiCertGlobalRootCA.crt.pem'}
+        }
     }
 }
